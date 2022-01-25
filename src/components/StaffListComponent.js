@@ -76,7 +76,7 @@ class StaffList extends Component {
     return (
       <div className="container">
         <div className="row">{stafflist}</div>
-        <div>
+        <div className="title">
           <p>Bấm vào tên nhân viên để xem thông tin</p>
         </div>
         <div className="button1">

@@ -28,6 +28,11 @@ body{
 .navbar{
   margin: 10px;
 }
+
+.container .title p{
+  margin-bottom: 0;
+}
+
 .container .button1 button{
   margin: 0 10px 10px 0;
 }
