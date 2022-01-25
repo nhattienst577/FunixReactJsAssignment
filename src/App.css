@@ -28,7 +28,9 @@ body{
 .navbar{
   margin: 10px;
 }
-
+.container .button1 button{
+  margin: 0 10px 10px 0;
+}
 /* desktop */
 /* @media screen and (min-width: 992px) {
   .App-header .container .row{

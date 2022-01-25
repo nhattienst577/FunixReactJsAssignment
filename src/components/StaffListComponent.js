@@ -18,6 +18,7 @@ class StaffList extends Component {
 
     this.state = {
       class: "col-6",
+      class1: "col-6",
       selectedStaff: null,
     };
   }
@@ -39,7 +40,7 @@ class StaffList extends Component {
   renderStaff(staff) {
     if (staff != null) {
       return (
-        <div className={this.state.class}>
+        <div className={this.state.class1}>
           <Card>
             <CardBody>
               <CardTitle>Họ và Tên: {staff.name}</CardTitle>
@@ -78,15 +79,17 @@ class StaffList extends Component {
         <div>
           <p>Bấm vào tên nhân viên để xem thông tin</p>
         </div>
-        <button onClick={() => this.changeRow(2)} type="button" class="btn">
-          2 Cột
-        </button>
-        <button onClick={() => this.changeRow(3)} type="button" class="btn">
-          3 Cột
-        </button>
-        <button onClick={() => this.changeRow(6)} type="button" class="btn">
-          6 Cột
-        </button>
+        <div className="button1">
+          <button onClick={() => this.changeRow(2)} type="button" class="btn">
+            2 Cột
+          </button>
+          <button onClick={() => this.changeRow(3)} type="button" class="btn">
+            3 Cột
+          </button>
+          <button onClick={() => this.changeRow(6)} type="button" class="btn">
+            6 Cột
+          </button>
+        </div>
 
         <div className="row">{this.renderStaff(this.state.selectedStaff)}</div>
       </div>
