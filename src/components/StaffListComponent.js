@@ -26,6 +26,16 @@ class StaffList extends Component {
     this.setState({ selectedStaff: staff });
   }
 
+  changeRow(param) {
+    if (param === 2) {
+      this.setState({ class: "col-6" });
+    } else if (param === 3) {
+      this.setState({ class: "col-4" });
+    } else if (param === 6) {
+      this.setState({ class: "col-2" });
+    }
+  }
+
   renderStaff(staff) {
     if (staff != null) {
       return (
@@ -68,6 +78,16 @@ class StaffList extends Component {
         <div>
           <p>Bấm vào tên nhân viên để xem thông tin</p>
         </div>
+        <button onClick={() => this.changeRow(2)} type="button" class="btn">
+          2 Cột
+        </button>
+        <button onClick={() => this.changeRow(3)} type="button" class="btn">
+          3 Cột
+        </button>
+        <button onClick={() => this.changeRow(6)} type="button" class="btn">
+          6 Cột
+        </button>
+
         <div className="row">{this.renderStaff(this.state.selectedStaff)}</div>
       </div>
     );
