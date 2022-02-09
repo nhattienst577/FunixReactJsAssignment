@@ -3,7 +3,7 @@ import { Card, CardImg } from "reactstrap";
 
 function RenderStaffItem({ staff, onClick }) {
   return (
-    <Card>
+    <Card onClick={() => onClick(staff.id)}>
       <CardImg width="100%" src={staff.image} alt={staff.name} />
       <h4>{staff.name}</h4>
     </Card>
@@ -14,7 +14,7 @@ const StaffList = (props) => {
   const stafflist = props.staffs.map((staff) => {
     return (
       <div className="col-lg-2 col-sm-6 col-md-4" key={staff.id}>
-        <RenderStaffItem staff={staff} />
+        <RenderStaffItem staff={staff} onClick={props.onClick} />
       </div>
     );
   });

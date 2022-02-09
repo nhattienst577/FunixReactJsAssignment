@@ -10,14 +10,29 @@ class Main extends Component {
 
     this.state = {
       staffs: STAFFS,
+      selectedStaff: null,
       departments: DEPARTMENTS,
     };
+  }
+
+  onStaffSelect(staffId) {
+    this.setState({ selectedStaff: staffId });
   }
 
   render() {
     return (
       <div>
-        <StaffList staffs={this.state.staffs} />
+        <StaffList
+          staffs={this.state.staffs}
+          onClick={(staffId) => this.onStaffSelect(staffId)}
+        />
+        <StaffDetail
+          staff={
+            this.state.staffs.filter(
+              (staff) => staff.id === this.state.selectedStaff
+            )[0]
+          }
+        />
       </div>
     );
   }
