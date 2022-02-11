@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Header from "./HeaderComponent";
+import Footer from "./FooterComponent";
 import StaffList from "./StaffComponent";
 import { STAFFS } from "../shared/staffs";
 import StaffDetail from "./StaffDetailComponent";
@@ -28,6 +29,7 @@ class Main extends Component {
           />
           <Redirect to="/nhanvien" />
         </Switch>
+        <Footer />
       </div>
     );
   }
