@@ -1,51 +1,43 @@
 /* .App {
   text-align: center;
+} */
+
+.row-header{
+  margin:0px auto;
+  padding:0px auto;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.row-content {
+  margin:0px auto;
+  padding: 50px 0px 50px 0px;
+  border-bottom: 1px ridge;
+  min-height:400px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.footer{
+  background-color: #707276;
+  margin:0px auto;
+  padding: 20px 0px 20px 0px;
 }
-body{
-  background-color: #282c34;
-}
-.App-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: black;
-}
-.navbar{
-  margin: 10px;
+.jumbotron {
+  padding:70px 30px 70px 30px;
+  margin:0px auto;
+  background: #3e3f42 ;
+  color:floralwhite;
 }
 
-.container .title p{
-  margin-bottom: 0;
+/* address{
+  font-size:80%;
+  margin:0px;
+  color:#F9fcff;
+} */
+
+.navbar-dark {
+  background-color: #2b3139;
 }
 
-.container .button1 button{
-  margin: 0 10px 10px 0;
-}
-
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-    
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}  */
+/* .salary {
+  color: #F9fcff;
+  font-weight: bold;
+  padding: 10px 16px;
+} */
