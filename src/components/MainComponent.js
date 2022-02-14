@@ -18,16 +18,32 @@ class Main extends Component {
   }
 
   render() {
+    const StaffWithId = ({ match }) => {
+      return (
+        <StaffDetail
+          staff={
+            this.state.staffs.filter(
+              (staff) => staff.id === parseInt(match.params.id, 10)
+            )[0]
+          }
+          profile={this.state.staffs.filter(
+            (info) => info.id === parseInt(match.params.id, 10)
+          )}
+        />
+      );
+    };
+
     return (
       <div>
         <Header />
         <Switch>
           <Route
             exact
-            path="/nhanvien"
+            path="/nhan-vien"
             component={() => <StaffList staffs={this.state.staffs} />}
           />
-          <Redirect to="/nhanvien" />
+          <Route path="/nhan-vien/:id" component={StaffWithId} />
+          <Redirect to="/nhan-vien" />
         </Switch>
         <Footer />
       </div>

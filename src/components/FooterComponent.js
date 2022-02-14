@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 function Footer(props) {
   return (
@@ -20,7 +19,9 @@ function Footer(props) {
               <i className="fa fa-fax fa-lg"></i>: +852 8765 4321
               <br />
               <i className="fa fa-envelope fa-lg"></i>:{" "}
-              <a href="mailto:confusion@food.net">confusion@food.net</a>
+              <a href="mailto:confusion@food.net" style={{ color: "#F9fcff" }}>
+                confusion@food.net
+              </a>
             </address>
           </div>
           <div className="col-12 col-sm-4 align-self-center">
@@ -55,7 +56,11 @@ function Footer(props) {
               >
                 <i className="fa fa-youtube"></i>
               </a>
-              <a className="btn btn-social-icon" href="mailto:">
+              <a
+                className="btn btn-social-icon"
+                href="mailto:"
+                style={{ color: "#F9fcff" }}
+              >
                 <i className="fa fa-envelope-o"></i>
               </a>
             </div>
@@ -63,7 +68,7 @@ function Footer(props) {
         </div>
         <div className="row justify-content-center">
           <div className="col-auto">
-            <p>© Copyright 2018 Ristorante Con Fusion</p>
+            <p>© Copyright 2021 Vu Hoang Anh</p>
           </div>
         </div>
       </div>

@@ -1,5 +1,14 @@
 import React from "react";
-import { Card, CardImg, CardBody, CardText, CardTitle } from "reactstrap";
+import {
+  Card,
+  CardImg,
+  CardBody,
+  CardText,
+  CardTitle,
+  Breadcrumb,
+  BreadcrumbItem,
+} from "reactstrap";
+import { Link } from "react-router-dom";
 import dateFormat from "dateformat";
 
 function RenderStaff({ staff }) {
@@ -42,10 +51,16 @@ function RenderProfile({ profile }) {
 }
 
 const StaffDetail = (props) => {
-  if (props.staff != null) {
+  if (props.staff != null)
     return (
       <div className="container">
         <div className="row">
+          <Breadcrumb>
+            <BreadcrumbItem>
+              <Link to="/nhan-vien">Nhân Viên</Link>
+            </BreadcrumbItem>
+            <BreadcrumbItem active>{props.staff.name}</BreadcrumbItem>
+          </Breadcrumb>
           <div className="col-12">
             <h3>Nhân Viên</h3>
             <hr />
@@ -57,7 +72,7 @@ const StaffDetail = (props) => {
         </div>
       </div>
     );
-  } else {
+  else {
     return <div></div>;
   }
 };
