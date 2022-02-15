@@ -68,7 +68,7 @@ function Footer(props) {
         </div>
         <div className="row justify-content-center">
           <div className="col-auto">
-            <p>© Copyright 2021 Vu Hoang Anh</p>
+            <p>© Copyright 2022 Lâm Nhật Tiến</p>
           </div>
         </div>
       </div>
