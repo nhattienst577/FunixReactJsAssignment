@@ -1,31 +1,44 @@
-import React, { Component } from "react";
-import { Card, CardTitle, CardText } from "reactstrap";
+import React from "react";
+import {
+  Card,
+  CardTitle,
+  CardImg,
+  Breadcrumb,
+  BreadcrumbItem,
+} from "reactstrap";
+import { Link } from "react-router-dom";
 
-class Department extends Component {
-  render() {
-    const department = this.props.departments.map((item) => {
-      return (
-        <div
-          key={item.id}
-          className="col-md-4 col-sm-6 col-12"
-          style={{ padding: "15px 15px" }}
-        >
-          <Card>
-            <CardTitle>{item.name}</CardTitle>
-            <ul>
-              <CardText>Số lượng nhân viên: {item.numberOfStaff}</CardText>
-            </ul>
-          </Card>
-        </div>
-      );
-    });
-
+function RenderDepartment({ staffs }) {
+  const List = staffs.map((staff) => {
     return (
-      <div className="container">
-        <div className="row">{department}</div>
-      </div>
+      <Card key={staff.id} className="border col-6 col-md-4 col-lg-2">
+        <Link to={`/nhan-vien/${staff.id}`}>
+          <CardImg width="100%" src={staff.image} alt={staff.name} />
+          <CardTitle>{staff.name}</CardTitle>
+        </Link>
+      </Card>
     );
-  }
+  });
+
+  return <div className="row justify-content-center card-body">{List}</div>;
 }
 
-export default Department;
+const DepartmentDetail = (props) => {
+  return (
+    <div className="container">
+      <div className="row">
+        <Breadcrumb>
+          <BreadcrumbItem>
+            <Link to="/phong-ban">Phòng Ban</Link>
+          </BreadcrumbItem>
+          <BreadcrumbItem active>{props.department.name}</BreadcrumbItem>
+        </Breadcrumb>
+      </div>
+      <div className="row">
+        <RenderDepartment staffs={props.staffs} />
+      </div>
+    </div>
+  );
+};
+
+export default DepartmentDetail;
