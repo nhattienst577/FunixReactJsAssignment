@@ -2,54 +2,43 @@ import React from "react";
 import {
   Card,
   CardTitle,
-  CardText,
+  CardImg,
   Breadcrumb,
   BreadcrumbItem,
 } from "reactstrap";
 import { Link } from "react-router-dom";
 
-function RenderDepartmentItem({ departments }) {
-  const listDepartment = departments.departments.map((depart) => {
+function RenderDepartment({ staffs }) {
+  const List = staffs.map((staff) => {
     return (
-      <Card
-        key={depart.id}
-        className="col-md-4 col-sm-6 col-12"
-        style={{ padding: "15px 15px" }}
-      >
-        <Link to={`/phong-ban/${depart.id}`}>
-          <CardTitle>{depart.name}</CardTitle>
-          <ul>
-            <CardText>Số lượng nhân viên: {depart.numberOfStaff}</CardText>
-          </ul>
+      <Card key={staff.id} className="border col-6 col-md-4 col-lg-2">
+        <Link to={`/nhan-vien/${staff.id}`}>
+          <CardImg width="100%" src={staff.image} alt={staff.name} />
+          <CardTitle>{staff.name}</CardTitle>
         </Link>
       </Card>
     );
   });
-  return <div className="row">{listDepartment}</div>;
+
+  return <div className="row justify-content-center card-body">{List}</div>;
 }
 
-const Department = (props) => {
+const DepartmentDetail = (props) => {
   return (
     <div className="container">
-      <div className="breadcrumb">
+      <div className="row">
         <Breadcrumb>
           <BreadcrumbItem>
-            <Link to="/nhan-vien">Nhân Viên</Link>
+            <Link to="/phong-ban">Phòng Ban</Link>
           </BreadcrumbItem>
-          <BreadcrumbItem active>Phòng Ban</BreadcrumbItem>
+          <BreadcrumbItem active>{props.department.name}</BreadcrumbItem>
         </Breadcrumb>
       </div>
       <div className="row">
-        <div className="col-12">
-          <h3>Phòng Ban</h3>
-          <hr />
-        </div>
-      </div>
-      <div className="row">
-        <RenderDepartmentItem departments={props.departments} />
+        <RenderDepartment staffs={props.staffs} />
       </div>
     </div>
   );
 };
 
-export default Department;
+export default DepartmentDetail;

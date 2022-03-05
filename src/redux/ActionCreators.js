@@ -47,7 +47,28 @@ export const addDepartments = (departments) => ({
   payload: departments,
 });
 
-//salary
+//salry
+// export const fetchSalary = () => (dispatch) => {
+//   dispatch(salaryLoading(true));
+
+//   return fetch(baseUrl + "staffsSalary")
+//     .then((response) => response.json())
+//     .then((salarys) => dispatch(addSalarys(salarys)));
+// };
+
+// export const salaryLoading = () => ({
+//   type: ActionTypes.SALARY_LOADING,
+// });
+
+// export const salaryFailed = (errmess) => ({
+//   type: ActionTypes.SALARY_FAILED,
+//   payload: errmess,
+// });
+
+// export const addSalary = (salarys) => ({
+//   type: ActionTypes.ADD_SALARY,
+//   payload: salarys,
+// });
 
 export const fetchSalarys = () => (dispatch) => {
   dispatch(salarysLoading(true));

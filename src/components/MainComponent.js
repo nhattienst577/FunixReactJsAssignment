@@ -8,6 +8,7 @@ import DepartmentDetail from "./DepartmentDetailComponent";
 import Salary from "./SalaryComponent";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+
 import {
   fetchStaffs,
   fetchDepartments,
@@ -40,7 +41,6 @@ class Main extends Component {
     this.props.fetchDepartments();
     this.props.fetchSalarys();
   }
-
   render() {
     const StaffWithId = ({ match }) => {
       return (
@@ -92,7 +92,6 @@ class Main extends Component {
             path="/bang-luong"
             component={() => <Salary salarys={this.props.salarys} />}
           />
-          <Redirect to="/nhan-vien" />
         </Switch>
         <Footer />
       </div>
