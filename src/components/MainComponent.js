@@ -9,35 +9,24 @@ import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import Department from "./DepartmentComponent";
 import Salary from "./SalaryComponent";
-
+import { fetchStaffs } from "../redux/ActionCreators";
 
 const mapStateToProps = (state) => {
   return {
-    staffs : state.staffs,
-    departments : state.departments
-  }
-} 
+    staffs: state.staffs,
+    departments: state.departments,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchStaffs: () => {
+    dispatch(fetchStaffs());
+  },
+});
 
 class Main extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      staffs: STAFFS,
-      departments: DEPARTMENTS,
-      
-    };
-
-    this.updateState = this.updateState.bind(this);
-
-  }
-
-  updateState(staff) {
-    const currentStaffs = this.state.staffs;
-    this.setState({
-      staffs: currentStaffs.concat([staff]),
-    });
-    localStorage.setItem("Staffs", JSON.stringify(currentStaffs.concat([staff])));
+  componentDidMount() {
+    this.props.fetchStaffs();
   }
 
   render() {
@@ -45,18 +34,15 @@ class Main extends Component {
       return (
         <StaffDetail
           staff={
-            this.state.staffs.filter(
-              (staff) => staff.id === parseInt(match.params.id, 10)
+            this.props.staffs.staffs.filter(
+              (staff) => staff.id === parseInt(match.params.staffId, 10)
             )[0]
           }
-          profile={this.state.staffs.filter(
-            (info) => info.id === parseInt(match.params.id, 10)
-          )}
+          departments={this.props.departments.departments}
         />
       );
     };
 
-    
     return (
       <div>
         <Header />
@@ -64,7 +50,12 @@ class Main extends Component {
           <Route
             exact
             path="/nhan-vien"
-            component={() => <StaffList staffs={this.state.staffs} updateState={(newStaffs) => this.updateState(newStaffs)} />}
+            component={() => (
+              <StaffList
+                staffs={this.state.staffs}
+                updateState={(newStaffs) => this.updateState(newStaffs)}
+              />
+            )}
           />
           <Route path="/nhan-vien/:id" component={StaffWithId} />
           <Route
@@ -87,5 +78,4 @@ class Main extends Component {
   }
 }
 
-export default withRouter(connect(mapStateToProps)(Main))
-
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));
