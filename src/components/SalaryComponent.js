@@ -8,7 +8,7 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import Loading from "./LoadingComponent";
-import { FadeTransform } from "react-transition-group";
+import { FadeTransform } from "react-animation-components";
 
 function RenderSalary({ salarys }) {
   console.log("salary: " + salarys);
