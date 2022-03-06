@@ -7,11 +7,16 @@ import {
   BreadcrumbItem,
 } from "reactstrap";
 import { Link } from "react-router-dom";
+import { baseUrl } from "../shared/baseUrl";
 import Loading from "./LoadingComponent";
 import { FadeTransform } from "react-animation-components";
 
 function RenderStaffItem({ staffs }) {
   const List = staffs.staffs.map((staff) => {
+    //console.log("IMAGE " + JSON.stringify(staffs.image));
+    // var yourUrlImage = staff.image;
+    // var results = yourUrlImage.slice(1);
+    // console.log("url : " + results);
     return (
       <Card key={staff.id} className="border col-6 col-md-4 col-lg-2">
         <FadeTransform
@@ -19,7 +24,13 @@ function RenderStaffItem({ staffs }) {
           transformProps={{ exitTransform: "scale(0.5) translateY(-50%)" }}
         >
           <Link to={`/nhan-vien/${staff.id}`}>
-            <CardImg width="100%" src={staff.image} alt={staff.name} />
+            <CardImg
+              width="100%"
+              // /asset/images/alberto.png
+              // src="assets/images/alberto.png"
+              src={staff.image}
+              alt={staff.name}
+            />
             <CardTitle>{staff.name}</CardTitle>
           </Link>
         </FadeTransform>
