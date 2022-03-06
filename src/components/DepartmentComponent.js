@@ -8,6 +8,7 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import Loading from "./LoadingComponent";
+import { FadeTransform } from "react-transition-group";
 
 function RenderDepartmentItem({ departments }) {
   const listDepartment = departments.departments.map((depart) => {
@@ -17,12 +18,17 @@ function RenderDepartmentItem({ departments }) {
         className="col-md-4 col-sm-6 col-12"
         style={{ padding: "15px 15px" }}
       >
-        <Link to={`/phong-ban/${depart.id}`}>
-          <CardTitle>{depart.name}</CardTitle>
-          <ul>
-            <CardText>Số lượng nhân viên: {depart.numberOfStaff}</CardText>
-          </ul>
-        </Link>
+        <FadeTransform
+          in
+          transformProps={{ exitTransform: "scale(0.5) translateY(-50%)" }}
+        >
+          <Link to={`/phong-ban/${depart.id}`}>
+            <CardTitle>{depart.name}</CardTitle>
+            <ul>
+              <CardText>Số lượng nhân viên: {depart.numberOfStaff}</CardText>
+            </ul>
+          </Link>
+        </FadeTransform>
       </Card>
     );
   });

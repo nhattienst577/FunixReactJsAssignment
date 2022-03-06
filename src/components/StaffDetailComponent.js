@@ -11,33 +11,44 @@ import {
 import { Link } from "react-router-dom";
 import dateFormat from "dateformat";
 import Loading from "./LoadingComponent";
+import { FadeTransform, Fade, Stagger } from "react-animation-components";
 
 function RenderStaff({ staff, departments }) {
   const staffDetail = departments.filter(
     (depart) => depart.id === staff.departmentId
   )[0].name;
   return (
-    <div className="container">
-      <div className="row">
-        <Card className="col-md-3 col-sm-4 col-12">
-          <CardImg width="100%" src={staff.image} alt={staff.name} />
-        </Card>
-        <Card key={staff.id} className="col-md-9 col-sm-8 col-12">
-          <CardBody>
-            <CardTitle>Họ và Tên: {staff.name}</CardTitle>
-            <CardText>
-              Ngày Sinh: {dateFormat(staff.doB, "dd/mm/yyyy")}
-            </CardText>
-            <CardText>
-              Ngày Vào Công Ty: {dateFormat(staff.startDate, "dd/mm/yyyy")}
-            </CardText>
-            <CardText>Phòng Ban: {staffDetail}</CardText>
-            <CardText>Số Ngày Nghỉ Còn Lại: {staff.annualLeave}</CardText>
-            <CardText>Số Ngày Đã Làm Thêm: {staff.overTime}</CardText>
-          </CardBody>
-        </Card>
+    <FadeTransform
+      in
+      transformProps={{ exitTransform: "scale(0.5) translateY(-50%)" }}
+    >
+      <div className="container">
+        <div className="row">
+          <Card className="col-md-3 col-sm-4 col-12">
+            <CardImg width="100%" src={staff.image} alt={staff.name} />
+          </Card>
+          <Card key={staff.id} className="col-md-9 col-sm-8 col-12">
+            <Stagger in>
+              <CardBody>
+                <CardTitle>Họ và Tên: {staff.name}</CardTitle>
+                <Fade in>
+                  <CardText>
+                    Ngày Sinh: {dateFormat(staff.doB, "dd/mm/yyyy")}
+                  </CardText>
+                  <CardText>
+                    Ngày Vào Công Ty:{" "}
+                    {dateFormat(staff.startDate, "dd/mm/yyyy")}
+                  </CardText>
+                  <CardText>Phòng Ban: {staffDetail}</CardText>
+                  <CardText>Số Ngày Nghỉ Còn Lại: {staff.annualLeave}</CardText>
+                  <CardText>Số Ngày Đã Làm Thêm: {staff.overTime}</CardText>
+                </Fade>
+              </CardBody>
+            </Stagger>
+          </Card>
+        </div>
       </div>
-    </div>
+    </FadeTransform>
   );
 }
 

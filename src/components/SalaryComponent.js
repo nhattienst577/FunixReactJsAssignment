@@ -8,6 +8,7 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import Loading from "./LoadingComponent";
+import { FadeTransform } from "react-transition-group";
 
 function RenderSalary({ salarys }) {
   console.log("salary: " + salarys);
@@ -18,15 +19,20 @@ function RenderSalary({ salarys }) {
         className="col-md-4 col-sm-6 col-12"
         style={{ padding: "15px 15px" }}
       >
-        <CardTitle>{salary.name}</CardTitle>
-        <ul style={{ padding: "0 15px" }}>
-          <CardText>Mã Nhân Viên: {salary.id}</CardText>
-          <CardText>Hệ Số Lương: {salary.salaryScale}</CardText>
-          <CardText>Số Giờ Làm Thêm: {salary.overTime}</CardText>
-          <div className="bg-secondary">
-            <CardText>Lương: {salary.salary}</CardText>
-          </div>
-        </ul>
+        <FadeTransform
+          in
+          transformProps={{ exitTransform: "scale(0.5) translateY(-50%)" }}
+        >
+          <CardTitle>{salary.name}</CardTitle>
+          <ul style={{ padding: "0 15px" }}>
+            <CardText>Mã Nhân Viên: {salary.id}</CardText>
+            <CardText>Hệ Số Lương: {salary.salaryScale}</CardText>
+            <CardText>Số Giờ Làm Thêm: {salary.overTime}</CardText>
+            <div className="bg-secondary">
+              <CardText>Lương: {salary.salary}</CardText>
+            </div>
+          </ul>
+        </FadeTransform>
       </Card>
     );
   });

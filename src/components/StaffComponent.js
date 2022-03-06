@@ -8,15 +8,21 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import Loading from "./LoadingComponent";
+import { FadeTransform } from "react-animation-components";
 
 function RenderStaffItem({ staffs }) {
   const List = staffs.staffs.map((staff) => {
     return (
       <Card key={staff.id} className="border col-6 col-md-4 col-lg-2">
-        <Link to={`/nhan-vien/${staff.id}`}>
-          <CardImg width="100%" src={staff.image} alt={staff.name} />
-          <CardTitle>{staff.name}</CardTitle>
-        </Link>
+        <FadeTransform
+          in
+          transformProps={{ exitTransform: "scale(0.5) translateY(-50%)" }}
+        >
+          <Link to={`/nhan-vien/${staff.id}`}>
+            <CardImg width="100%" src={staff.image} alt={staff.name} />
+            <CardTitle>{staff.name}</CardTitle>
+          </Link>
+        </FadeTransform>
       </Card>
     );
   });
