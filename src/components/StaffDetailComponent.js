@@ -10,6 +10,7 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import dateFormat from "dateformat";
+import Loading from "./LoadingComponent";
 
 function RenderStaff({ staff, departments }) {
   const staffDetail = departments.filter(
@@ -41,25 +42,42 @@ function RenderStaff({ staff, departments }) {
 }
 
 const StaffDetail = (props) => {
-  return (
-    <div className="container">
-      <div className="row">
-        <Breadcrumb>
-          <BreadcrumbItem>
-            <Link to="/nhan-vien">Nhân Viên</Link>
-          </BreadcrumbItem>
-          <BreadcrumbItem active>{props.staff.name}</BreadcrumbItem>
-        </Breadcrumb>
-        <div className="col-12">
-          <h3>Nhân Viên</h3>
-          <hr />
+  if (props.isLoading) {
+    return (
+      <div className="container">
+        <div className="row">
+          <Loading />
         </div>
       </div>
-      <div className="row">
-        <RenderStaff staff={props.staff} departments={props.departments} />
+    );
+  } else if (props.errMess) {
+    return (
+      <div className="container">
+        <div className="row">
+          <p>{props.errMess}</p>
+        </div>
       </div>
-    </div>
-  );
+    );
+  } else
+    return (
+      <div className="container">
+        <div className="row">
+          <Breadcrumb>
+            <BreadcrumbItem>
+              <Link to="/nhan-vien">Nhân Viên</Link>
+            </BreadcrumbItem>
+            <BreadcrumbItem active>{props.staff.name}</BreadcrumbItem>
+          </Breadcrumb>
+          <div className="col-12">
+            <h3>Nhân Viên</h3>
+            <hr />
+          </div>
+        </div>
+        <div className="row">
+          <RenderStaff staff={props.staff} departments={props.departments} />
+        </div>
+      </div>
+    );
 };
 
 export default StaffDetail;

@@ -8,7 +8,6 @@ import DepartmentDetail from "./DepartmentDetailComponent";
 import Salary from "./SalaryComponent";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-
 import {
   fetchStaffs,
   fetchDepartments,
@@ -51,6 +50,8 @@ class Main extends Component {
             )[0]
           }
           departments={this.props.departments.departments}
+          isLoading={this.props.staffs.isLoading}
+          errMess={this.props.staffs.errMess}
         />
       );
     };
@@ -65,6 +66,8 @@ class Main extends Component {
           staffs={this.props.staffs.staffs.filter(
             (staff) => staff.departmentId === match.params.departmentId
           )}
+          isLoading={this.props.staffs.isLoading}
+          errMess={this.props.staffs.errMess}
         />
       );
     };
@@ -76,21 +79,37 @@ class Main extends Component {
           <Route
             exact
             path="/nhan-vien"
-            component={() => <StaffList staffs={this.props.staffs} />}
+            component={() => (
+              <StaffList
+                staffs={this.props.staffs}
+                staffsLoading={this.props.staffs.isLoading}
+                staffsErrMess={this.props.staffs.errMess}
+              />
+            )}
           />
           <Route path="/nhan-vien/:staffId" component={StaffWithId} />
           <Route
             exact
             path="/phong-ban"
             component={() => (
-              <Department departments={this.props.departments} />
+              <Department
+                departments={this.props.departments}
+                departmentsLoading={this.props.departments.isLoading}
+                departmentsErrMess={this.props.departments.errMess}
+              />
             )}
           />
           <Route path="/phong-ban/:departmentId" component={DepartmentWithId} />
           <Route
             exact
             path="/bang-luong"
-            component={() => <Salary salarys={this.props.salarys} />}
+            component={() => (
+              <Salary
+                salarys={this.props.salarys}
+                salarysLoading={this.props.salarys.isLoading}
+                salarysErrMess={this.props.salarys.errMess}
+              />
+            )}
           />
         </Switch>
         <Footer />

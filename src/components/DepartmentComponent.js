@@ -7,6 +7,7 @@ import {
   BreadcrumbItem,
 } from "reactstrap";
 import { Link } from "react-router-dom";
+import Loading from "./LoadingComponent";
 
 function RenderDepartmentItem({ departments }) {
   const listDepartment = departments.departments.map((depart) => {
@@ -29,27 +30,44 @@ function RenderDepartmentItem({ departments }) {
 }
 
 const Department = (props) => {
-  return (
-    <div className="container">
-      <div className="breadcrumb">
-        <Breadcrumb>
-          <BreadcrumbItem>
-            <Link to="/nhan-vien">Nhân Viên</Link>
-          </BreadcrumbItem>
-          <BreadcrumbItem active>Phòng Ban</BreadcrumbItem>
-        </Breadcrumb>
-      </div>
-      <div className="row">
-        <div className="col-12">
-          <h3>Phòng Ban</h3>
-          <hr />
+  if (props.departments.isLoading) {
+    return (
+      <div className="container">
+        <div className="row">
+          <Loading />
         </div>
       </div>
-      <div className="row">
-        <RenderDepartmentItem departments={props.departments} />
+    );
+  } else if (props.departments.errMess) {
+    return (
+      <div className="container">
+        <div className="row">
+          <p>{props.departments.errMess}</p>
+        </div>
       </div>
-    </div>
-  );
+    );
+  } else
+    return (
+      <div className="container">
+        <div className="row">
+          <Breadcrumb>
+            <BreadcrumbItem>
+              <Link to="/nhan-vien">Nhân Viên</Link>
+            </BreadcrumbItem>
+            <BreadcrumbItem active>Phòng Ban</BreadcrumbItem>
+          </Breadcrumb>
+        </div>
+        <div className="row">
+          <div className="col-12">
+            <h3>Phòng Ban</h3>
+            <hr />
+          </div>
+        </div>
+        <div className="row">
+          <RenderDepartmentItem departments={props.departments} />
+        </div>
+      </div>
+    );
 };
 
 export default Department;

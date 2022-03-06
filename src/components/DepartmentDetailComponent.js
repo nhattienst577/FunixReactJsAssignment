@@ -7,6 +7,7 @@ import {
   BreadcrumbItem,
 } from "reactstrap";
 import { Link } from "react-router-dom";
+import Loading from "./LoadingComponent";
 
 function RenderDepartment({ staffs }) {
   const List = staffs.map((staff) => {
@@ -24,21 +25,38 @@ function RenderDepartment({ staffs }) {
 }
 
 const DepartmentDetail = (props) => {
-  return (
-    <div className="container">
-      <div className="row">
-        <Breadcrumb>
-          <BreadcrumbItem>
-            <Link to="/phong-ban">Phòng Ban</Link>
-          </BreadcrumbItem>
-          <BreadcrumbItem active>{props.department.name}</BreadcrumbItem>
-        </Breadcrumb>
+  if (props.isLoading) {
+    return (
+      <div className="container">
+        <div className="row">
+          <Loading />
+        </div>
       </div>
-      <div className="row">
-        <RenderDepartment staffs={props.staffs} />
+    );
+  } else if (props.errMess) {
+    return (
+      <div className="container">
+        <div className="row">
+          <p>{props.errMess}</p>
+        </div>
       </div>
-    </div>
-  );
+    );
+  } else
+    return (
+      <div className="container">
+        <div className="row">
+          <Breadcrumb>
+            <BreadcrumbItem>
+              <Link to="/phong-ban">Phòng Ban</Link>
+            </BreadcrumbItem>
+            <BreadcrumbItem active>{props.department.name}</BreadcrumbItem>
+          </Breadcrumb>
+        </div>
+        <div className="row">
+          <RenderDepartment staffs={props.staffs} />
+        </div>
+      </div>
+    );
 };
 
 export default DepartmentDetail;

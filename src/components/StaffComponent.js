@@ -7,6 +7,7 @@ import {
   BreadcrumbItem,
 } from "reactstrap";
 import { Link } from "react-router-dom";
+import Loading from "./LoadingComponent";
 
 function RenderStaffItem({ staffs }) {
   const List = staffs.staffs.map((staff) => {
@@ -25,27 +26,45 @@ function RenderStaffItem({ staffs }) {
 
 class StaffList extends Component {
   render() {
-    return (
-      <div className="container">
-        <div className="breadcrumb">
-          <Breadcrumb>
-            <BreadcrumbItem>
-              <Link to="/nhan-vien">App</Link>
-            </BreadcrumbItem>
-            <BreadcrumbItem active>Nhân Viên</BreadcrumbItem>
-          </Breadcrumb>
-        </div>
-        <div className="row">
-          <div className="col-12">
-            <h3>Nhân Viên</h3>
-            <hr />
+    if (this.props.staffs.isLoading) {
+      return (
+        <div className="container">
+          <div className="row">
+            <Loading />
           </div>
         </div>
-        <div className="row">
-          <RenderStaffItem staffs={this.props.staffs} />
+      );
+    } else if (this.props.staffs.errMess) {
+      return (
+        <div className="container">
+          <div className="row">
+            <p>{this.props.staffs.errMess}</p>
+          </div>
         </div>
-      </div>
-    );
+      );
+    } else {
+      return (
+        <div className="container">
+          <div className="breadcrumb">
+            <Breadcrumb>
+              <BreadcrumbItem>
+                <Link to="/nhan-vien">App</Link>
+              </BreadcrumbItem>
+              <BreadcrumbItem active>Nhân Viên</BreadcrumbItem>
+            </Breadcrumb>
+          </div>
+          <div className="row">
+            <div className="col-12">
+              <h3>Nhân Viên</h3>
+              <hr />
+            </div>
+          </div>
+          <div className="row">
+            <RenderStaffItem staffs={this.props.staffs} />
+          </div>
+        </div>
+      );
+    }
   }
 }
 
