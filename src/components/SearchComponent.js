@@ -10,7 +10,8 @@ class Search extends Component {
   }
 
   handleChange = (event) => {
-    console.log(event.target.value);
+    //khi nhap bat cu thong tin gi vao input thi hien ra thong tin vua nhap
+    console.log("du lieu nhan duoc la : " + event.target.value);
     this.setState({ tempValue: event.target.value });
   };
 
@@ -28,12 +29,13 @@ class Search extends Component {
                   type="text"
                   className="form-control"
                   placeholder="Nhập tên cần tìm kiếm ..."
+                  //su kien onchange xay ra khi gia tri cua 1 phan tu duoc thay doi
                   onChange={(event) => this.handleChange(event)}
                 />
               </div>
               <div
                 className="btn btn-info"
-                onClick={(text) => this.props.checkSearch(this.state.tempValue)}
+                onClick={() => this.props.checkSearch(this.state.tempValue)}
               >
                 Search
               </div>
