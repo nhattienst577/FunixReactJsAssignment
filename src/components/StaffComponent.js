@@ -186,24 +186,35 @@ class StaffList extends Component {
         <Modal isOpen={this.state.modalOpen} toggle={this.toggleModal}>
           <ModalHeader toggle={this.toggleModal}>Thêm nhân viên</ModalHeader>
           <ModalBody>
-            <Form onSubmit={this.handleSubmit}>
+            {/* lấy value từ handleSubmit */}
+            <LocalForm onSubmit={(value) => this.handleSubmit(value)}>
               <Row className="control-group">
                 <Label htmlFor="name" md={4}>
                   Tên
                 </Label>
                 <Col md={8}>
-                  <Input
-                    type="text"
+                  {/* ràng buộc validate */}
+                  <Control.text
+                    model=".name"
                     className="form-control"
                     id="name"
                     name="name"
-                    value={this.state.name}
-                    valid={errors.name === ""}
-                    invalid={errors.name !== ""}
-                    onBlur={this.handleBlur("name")}
-                    onChange={this.handleInputChange}
+                    validators={{
+                      required,
+                      minLength: minLength(3),
+                      maxLength: maxLength(30),
+                    }}
                   />
-                  <FormFeedback>{errors.name}</FormFeedback>
+                  <Errors
+                    model=".name"
+                    className="text-danger"
+                    show="touched"
+                    messages={{
+                      required: "Yêu cầu  ",
+                      minLength: "nhập nhiều hơn 3 ký tự",
+                      maxLength: "Yêu cầu nhập ít hơn 30 ký tự",
+                    }}
+                  />
                 </Col>
               </Row>
               <Row className="control-group">
@@ -246,24 +257,19 @@ class StaffList extends Component {
                   Phòng ban
                 </Label>
                 <Col md={8}>
-                  <Input
-                    type="select"
+                  <Control.select
+                    model=".department"
                     name="department"
                     id="department"
                     className="form-control"
-                    value={this.state.department}
-                    valid={errors.department === ""}
-                    invalid={errors.department !== ""}
-                    onBlur={this.handleBlur("department")}
-                    onChange={this.handleInputChange}
+                    defaultValue="IT"
                   >
                     <option>Sale</option>
                     <option>HR</option>
                     <option>Marketing</option>
                     <option>IT</option>
                     <option>Finance</option>
-                  </Input>
-                  <FormFeedback>{errors.department}</FormFeedback>
+                  </Control.select>
                 </Col>
               </Row>
               <Row className="control-group">
@@ -271,18 +277,26 @@ class StaffList extends Component {
                   Hệ số lương
                 </Label>
                 <Col md={8}>
-                  <Input
-                    type="text"
+                  <Control.text
+                    model=".salaryScale"
                     id="salaryScale"
                     name="salaryScale"
                     className="form-control"
-                    value={this.state.salaryScale}
-                    valid={errors.salaryScale === ""}
-                    invalid={errors.salaryScale !== ""}
-                    onBlur={this.handleBlur("salaryScale")}
-                    onChange={this.handleInputChange}
+                    validators={{
+                      required,
+                      isNumber,
+                    }}
+                    defaultValue="1"
                   />
-                  <FormFeedback>{errors.salaryScale}</FormFeedback>
+                  <Errors
+                    model=".salaryScale"
+                    className="text-danger"
+                    show="touched"
+                    messages={{
+                      required: "Yêu cầu nhập",
+                      isNumber: "Phải là chữ số",
+                    }}
+                  />
                 </Col>
               </Row>
               <Row className="control-group">
@@ -290,18 +304,26 @@ class StaffList extends Component {
                   Số ngày nghỉ còn lại
                 </Label>
                 <Col md={8}>
-                  <Input
-                    type="text"
+                  <Control.text
+                    model=".annualLeave"
                     id="annualLeave"
                     name="annualLeave"
                     className="form-control"
-                    value={this.state.annualLeave}
-                    valid={errors.annualLeave === ""}
-                    invalid={errors.annualLeave !== ""}
-                    onBlur={this.handleBlur("annualLeave")}
-                    onChange={this.handleInputChange}
+                    defaultValue="0"
+                    validators={{
+                      required,
+                      isNumber,
+                    }}
                   />
-                  <FormFeedback>{errors.annualLeave}</FormFeedback>
+                  <Errors
+                    model=".annualLeave"
+                    className="text-danger"
+                    show="touched"
+                    messages={{
+                      required: "Yêu cầu nhập",
+                      isNumber: "Phải là chữ số",
+                    }}
+                  />
                 </Col>
               </Row>
               <Row className="control-group">
@@ -309,18 +331,26 @@ class StaffList extends Component {
                   Số ngày đã làm thêm
                 </Label>
                 <Col md={8}>
-                  <Input
-                    type="text"
+                  <Control.text
+                    model=".overTime"
                     id="overTime"
                     name="overTime"
                     className="form-control"
-                    value={this.state.overTime}
-                    valid={errors.overTime === ""}
-                    invalid={errors.overTime !== ""}
-                    onBlur={this.handleBlur("overTime")}
-                    onChange={this.handleInputChange}
+                    defaultValue="0"
+                    validators={{
+                      required,
+                      isNumber,
+                    }}
                   />
-                  <FormFeedback>{errors.overTime}</FormFeedback>
+                  <Errors
+                    model=".overTime"
+                    className="text-danger"
+                    show="touched"
+                    messages={{
+                      required: "Yêu cầu nhập",
+                      isNumber: "Phải là chữ số",
+                    }}
+                  />
                 </Col>
               </Row>
               <Row className="control-group">
@@ -330,7 +360,7 @@ class StaffList extends Component {
                   </Button>
                 </Col>
               </Row>
-            </Form>
+            </LocalForm>
           </ModalBody>
         </Modal>
 
