@@ -205,6 +205,7 @@ class StaffList extends Component {
                       maxLength: maxLength(30),
                     }}
                   />
+                  {/* kiểm tra từ model trong control.text */}
                   <Errors
                     model=".name"
                     className="text-danger"
