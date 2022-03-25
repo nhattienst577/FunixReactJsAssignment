@@ -70,6 +70,38 @@ class StaffList extends Component {
     this.setState({ nameF: nameS });
   }
 
+  //khi ấn vào ô input trong form add staff
+  handleBlur = (field) => (event) => {
+    this.setState({
+      touched: { ...this.state.touched, [field]: true },
+    });
+  };
+
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+    this.setState({
+      [name]: value,
+    });
+  }
+
+  //khi submit form add tạo 1 đối tượng mới
+  handleSubmit = () => {
+    const newStaff = {
+      name: this.state.name,
+      doB: this.state.doB,
+      startDate: this.state.startDate,
+      department: this.state.department,
+      salaryScale: this.state.salaryScale,
+      annualLeave: this.state.annualLeave,
+      overTime: this.state.overTime,
+      image: this.state.image,
+    };
+    //nhận props onadd từ main, để onadd từ components cha có thể nhận được newstaff
+    this.props.onAdd(newStaff);
+  };
+
   toggleModal() {
     this.setState({
       modalOpen: !this.state.modalOpen,

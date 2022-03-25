@@ -20,6 +20,19 @@ class Main extends Component {
     this.addStaff = this.addStaff.bind(this);
   }
 
+  //nhận dữ liệu từ components con 1 parameters
+  addStaff = (staff) => {
+    //tạo 1 id ngẫu nhiên
+    const id = Math.floor(Math.random() * 10000 + 1);
+    const newStaff = { id, ...staff };
+    //sau đó setState lại mảng copy lại staff ban đầu và đưa thêm newStaff vào
+    this.setState({
+      staffs: [...this.state.staffs, newStaff],
+    });
+    console.log("this is : " + newStaff);
+    console.log(this.state.staffs);
+  };
+
   render() {
     const StaffWithId = ({ match }) => {
       return (
@@ -43,7 +56,9 @@ class Main extends Component {
           <Route
             exact
             path="/nhan-vien"
-            component={() => <StaffList staffs={this.state.staffs} />}
+            component={() => (
+              <StaffList onAdd={this.addStaff} staffs={this.state.staffs} />
+            )}
           />
 
           <Route path="/nhan-vien/:id" component={StaffWithId} />
