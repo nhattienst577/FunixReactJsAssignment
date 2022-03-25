@@ -107,8 +107,54 @@ class StaffList extends Component {
       modalOpen: !this.state.modalOpen,
     });
   }
+  //ràng buộc validate
+  validate(
+    name,
+    department,
+    salaryScale,
+    doB,
+    startDate,
+    annualLeave,
+    overTime
+  ) {
+    const errors = {
+      name: "",
+      department: "",
+      doB: "",
+      startDate: "",
+      salaryScale: "",
+      annualLeave: "",
+      overTime: "",
+    };
+    if (this.state.touched.name && name.length < 3)
+      errors.name = "Name should be >= 3 characters";
+    else if (this.state.touched.name && name.length > 50)
+      errors.name = "Name should be <= 10 characters";
+    if (this.state.touched.department && department.length < 1)
+      errors.department = "Yêu cầu nhập";
+    if (this.state.touched.salaryScale && salaryScale.length < 1)
+      errors.salaryScale = "Yêu cầu nhập";
+    if (this.state.touched.annualLeave && annualLeave.length < 1)
+      errors.annualLeave = "Yêu cầu nhập";
+    if (this.state.touched.overTime && overTime.length < 1)
+      errors.overTime = "Yêu cầu nhập";
+    if (this.state.touched.doB && doB.length < 1) errors.doB = "Yêu cầu nhập";
+    if (this.state.touched.startDate && startDate.length < 1)
+      errors.startDate = "Yêu cầu nhập";
+    return errors;
+  }
 
   render() {
+    const errors = this.validate(
+      this.state.name,
+      this.state.department,
+      this.state.salaryScale,
+      this.state.doB,
+      this.state.startDate,
+      this.state.annualLeave,
+      this.state.overTime
+    );
+
     //nhận được props staffs từ main sau đó filter nó ra để kiểm tra 1 số yêu cầu trước khi map
     const stafflist = this.props.staffs
       .filter((val) => {
