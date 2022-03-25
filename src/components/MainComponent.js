@@ -17,6 +17,7 @@ class Main extends Component {
       staffs: STAFFS,
       departments: DEPARTMENTS,
     };
+    this.addStaff = this.addStaff.bind(this);
   }
 
   render() {
@@ -44,7 +45,9 @@ class Main extends Component {
             path="/nhan-vien"
             component={() => <StaffList staffs={this.state.staffs} />}
           />
+
           <Route path="/nhan-vien/:id" component={StaffWithId} />
+
           <Route
             exact
             path="/phong-ban"

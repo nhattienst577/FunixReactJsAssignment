@@ -5,8 +5,6 @@ import {
   CardTitle,
   Breadcrumb,
   BreadcrumbItem,
-  CardBody,
-  CardSubtitle,
   Button,
   Modal,
   Col,
@@ -59,6 +57,10 @@ class StaffList extends Component {
       modalOpen: false,
     };
     this.timNhanvien = this.timNhanvien.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   //lay duoc ten nameS nhap tu input
@@ -66,6 +68,12 @@ class StaffList extends Component {
     event.preventDefault();
     const nameS = event.target.nameS.value;
     this.setState({ nameF: nameS });
+  }
+
+  toggleModal() {
+    this.setState({
+      modalOpen: !this.state.modalOpen,
+    });
   }
 
   render() {
@@ -130,6 +138,157 @@ class StaffList extends Component {
         <div className="col-12">
           <hr />
         </div>
+
+        <Modal isOpen={this.state.modalOpen} toggle={this.toggleModal}>
+          <ModalHeader toggle={this.toggleModal}>Thêm nhân viên</ModalHeader>
+          <ModalBody>
+            <Form onSubmit={this.handleSubmit}>
+              <Row className="control-group">
+                <Label htmlFor="name" md={4}>
+                  Tên
+                </Label>
+                <Col md={8}>
+                  <Input
+                    type="text"
+                    className="form-control"
+                    id="name"
+                    name="name"
+                    value={this.state.name}
+                    valid={errors.name === ""}
+                    invalid={errors.name !== ""}
+                    onBlur={this.handleBlur("name")}
+                    onChange={this.handleInputChange}
+                  />
+                  <FormFeedback>{errors.name}</FormFeedback>
+                </Col>
+              </Row>
+              <Row className="control-group">
+                <Label htmlFor="doB" md={4}>
+                  Ngày sinh
+                </Label>
+                <Col md={8}>
+                  <Input
+                    type="date"
+                    name="doB"
+                    id="doB"
+                    value={this.state.doB}
+                    valid={errors.doB === ""}
+                    invalid={errors.doB !== ""}
+                    onBlur={this.handleBlur("doB")}
+                    onChange={this.handleInputChange}
+                  />
+                  <FormFeedback>{errors.doB}</FormFeedback>
+                </Col>
+              </Row>
+              <Row className="control-group">
+                <Label htmlFor="startDate" md={4}>
+                  Ngày vào công ty
+                </Label>
+                <Col md={8}>
+                  <Input
+                    type="date"
+                    name="startDate"
+                    id="startDate"
+                    valid={errors.startDate === ""}
+                    invalid={errors.startDate !== ""}
+                    onBlur={this.handleBlur("startDate")}
+                    onChange={this.handleInputChange}
+                  />
+                  <FormFeedback>{errors.startDate}</FormFeedback>
+                </Col>
+              </Row>
+              <Row className="control-group">
+                <Label htmlFor="department" md={4}>
+                  Phòng ban
+                </Label>
+                <Col md={8}>
+                  <Input
+                    type="select"
+                    name="department"
+                    id="department"
+                    className="form-control"
+                    value={this.state.department}
+                    valid={errors.department === ""}
+                    invalid={errors.department !== ""}
+                    onBlur={this.handleBlur("department")}
+                    onChange={this.handleInputChange}
+                  >
+                    <option>Sale</option>
+                    <option>HR</option>
+                    <option>Marketing</option>
+                    <option>IT</option>
+                    <option>Finance</option>
+                  </Input>
+                  <FormFeedback>{errors.department}</FormFeedback>
+                </Col>
+              </Row>
+              <Row className="control-group">
+                <Label htmlFor="salaryScale" md={4}>
+                  Hệ số lương
+                </Label>
+                <Col md={8}>
+                  <Input
+                    type="text"
+                    id="salaryScale"
+                    name="salaryScale"
+                    className="form-control"
+                    value={this.state.salaryScale}
+                    valid={errors.salaryScale === ""}
+                    invalid={errors.salaryScale !== ""}
+                    onBlur={this.handleBlur("salaryScale")}
+                    onChange={this.handleInputChange}
+                  />
+                  <FormFeedback>{errors.salaryScale}</FormFeedback>
+                </Col>
+              </Row>
+              <Row className="control-group">
+                <Label htmlFor="annualLeave" md={4}>
+                  Số ngày nghỉ còn lại
+                </Label>
+                <Col md={8}>
+                  <Input
+                    type="text"
+                    id="annualLeave"
+                    name="annualLeave"
+                    className="form-control"
+                    value={this.state.annualLeave}
+                    valid={errors.annualLeave === ""}
+                    invalid={errors.annualLeave !== ""}
+                    onBlur={this.handleBlur("annualLeave")}
+                    onChange={this.handleInputChange}
+                  />
+                  <FormFeedback>{errors.annualLeave}</FormFeedback>
+                </Col>
+              </Row>
+              <Row className="control-group">
+                <Label htmlFor="overTime" md={4}>
+                  Số ngày đã làm thêm
+                </Label>
+                <Col md={8}>
+                  <Input
+                    type="text"
+                    id="overTime"
+                    name="overTime"
+                    className="form-control"
+                    value={this.state.overTime}
+                    valid={errors.overTime === ""}
+                    invalid={errors.overTime !== ""}
+                    onBlur={this.handleBlur("overTime")}
+                    onChange={this.handleInputChange}
+                  />
+                  <FormFeedback>{errors.overTime}</FormFeedback>
+                </Col>
+              </Row>
+              <Row className="control-group">
+                <Col md={{ size: 10, offset: 2 }}>
+                  <Button type="submit" color="success">
+                    Thêm
+                  </Button>
+                </Col>
+              </Row>
+            </Form>
+          </ModalBody>
+        </Modal>
 
         <div className="row">{stafflist}</div>
       </div>
