@@ -39,28 +39,16 @@ class StaffList extends Component {
     super(props);
 
     this.state = {
-      name: "",
-      doB: "",
-      salaryScale: 1,
-      startDate: "",
-      department: "Sale",
-      annualLeave: 0,
-      overTime: 0,
-      salary: 30000,
-      image: "/assets/images/alberto.png",
-      touched: {
-        name: false,
-        doB: false,
-        salaryScale: false,
-        startDate: false,
-        department: false,
-        annualLeave: false,
-        overTime: false,
-      },
-
       nameF: "",
       modalOpen: false,
+      doB: "",
+      startDate: "",
+      touched: {
+        doB: false,
+        startDate: false,
+      },
     };
+
     this.timNhanvien = this.timNhanvien.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -92,19 +80,23 @@ class StaffList extends Component {
   }
 
   //khi submit form add tạo 1 đối tượng mới
-  handleSubmit = () => {
+  handleSubmit = (value) => {
     const newStaff = {
-      name: this.state.name,
+      name: value.name,
       doB: this.state.doB,
       startDate: this.state.startDate,
-      department: this.state.department,
-      salaryScale: this.state.salaryScale,
-      annualLeave: this.state.annualLeave,
-      overTime: this.state.overTime,
-      image: this.state.image,
+      department: value.department,
+      salaryScale: value.salaryScale,
+      annualLeave: value.annualLeave,
+      overTime: value.overTime,
+      image: "/assets/images/alberto.png",
     };
+    if (!this.state.doB || !this.state.startDate)
+      this.setState({
+        touched: { doB: true, startDate: true },
+      });
     //nhận props onadd từ main, để onadd từ components cha có thể nhận được newstaff
-    this.props.onAdd(newStaff);
+    else this.props.onAdd(newStaff);
   };
 
   toggleModal() {
@@ -113,52 +105,21 @@ class StaffList extends Component {
     });
   }
   //ràng buộc validate
-  validate(
-    name,
-    department,
-    salaryScale,
-    doB,
-    startDate,
-    annualLeave,
-    overTime
-  ) {
+  validate(doB, startDate) {
     const errors = {
-      name: "",
-      department: "",
       doB: "",
       startDate: "",
-      salaryScale: "",
-      annualLeave: "",
-      overTime: "",
     };
-    if (this.state.touched.name && name.length < 3)
-      errors.name = "Name should be >= 3 characters";
-    else if (this.state.touched.name && name.length > 50)
-      errors.name = "Name should be <= 10 characters";
-    if (this.state.touched.department && department.length < 1)
-      errors.department = "Yêu cầu nhập";
-    if (this.state.touched.salaryScale && salaryScale.length < 1)
-      errors.salaryScale = "Yêu cầu nhập";
-    if (this.state.touched.annualLeave && annualLeave.length < 1)
-      errors.annualLeave = "Yêu cầu nhập";
-    if (this.state.touched.overTime && overTime.length < 1)
-      errors.overTime = "Yêu cầu nhập";
+
     if (this.state.touched.doB && doB.length < 1) errors.doB = "Yêu cầu nhập";
     if (this.state.touched.startDate && startDate.length < 1)
       errors.startDate = "Yêu cầu nhập";
+
     return errors;
   }
 
   render() {
-    const errors = this.validate(
-      this.state.name,
-      this.state.department,
-      this.state.salaryScale,
-      this.state.doB,
-      this.state.startDate,
-      this.state.annualLeave,
-      this.state.overTime
-    );
+    const errors = this.validate(this.state.doB, this.state.startDate);
 
     //nhận được props staffs từ main sau đó filter nó ra để kiểm tra 1 số yêu cầu trước khi map
     const stafflist = this.props.staffs
