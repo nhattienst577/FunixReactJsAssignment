@@ -10,6 +10,7 @@ import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import {
   addStaff,
+  deleteStaff,
   fetchStaffs,
   fetchDepartments,
   fetchSalarys,
@@ -36,6 +37,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   addStaff: (staff) => {
     dispatch(addStaff(staff));
+  },
+  deleteStaff: (id) => {
+    dispatch(deleteStaff(id));
   },
 });
 

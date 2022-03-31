@@ -25,7 +25,7 @@ const maxLength = (len) => (val) => !val || val.length <= len;
 const minLength = (len) => (val) => val && val.length >= len;
 const isNumber = (val) => !isNaN(Number(val));
 
-function RenderStaffItem({ staff }) {
+function RenderStaffItem({ staff, onDeleteStaff }) {
   // const List = staffs.staffs.map((staff) => {
   //console.log("IMAGE " + JSON.stringify(staffs.image));
   // var yourUrlImage = staff.image;
@@ -48,6 +48,7 @@ function RenderStaffItem({ staff }) {
           <CardTitle>{staff.name}</CardTitle>
         </Card>
       </Link>
+      <Button color="danger" onClick={() => onDeleteStaff(staff.id)} />
     </FadeTransform>
   );
   // });
@@ -86,7 +87,10 @@ class StaffList extends Component {
       .map((val) => {
         return (
           <div className="col-6 col-md-4 col-lg-2 mt-3 mb-3" key={val.id}>
-            <RenderStaffItem staff={val} />
+            <RenderStaffItem
+              staff={val}
+              onDeleteStaff={this.props.onDeleteStaff}
+            />
           </div>
         );
       });

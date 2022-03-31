@@ -71,7 +71,7 @@ export const addSalarys = (salarys) => ({
 
 //add staffs
 //staff
-export const addStaffs = (staff) => ({
+export const addStaffSuccess = (staff) => ({
   type: ActionTypes.ADD_STAFFS,
   payload: staff, //nhận thông tin nhân viên sau khi người dùng đã post lên
 });
@@ -105,7 +105,7 @@ export const addStaff = (staff) => (dispatch) => {
         }
       )
       .then((response) => response.json())
-      .then((response) => dispatch(addStaffs(response)))
+      .then((response) => dispatch(addStaffSuccess(response)))
       .catch((error) => {
         console.log("Post staffs", error.message);
         alert("Your staff could not be posted\nError: " + error.message);
@@ -116,3 +116,15 @@ export const addStaff = (staff) => (dispatch) => {
 //update staffs
 
 //delete staffs
+export const deleteStaffSuccess = (id) => ({
+  type: ActionTypes.DELETE_STAFFS,
+  payload: id,
+});
+
+export const deleteStaff = (id) => (dispatch) => {
+  if (window.confirm("Are you sure to delete this staff?")) {
+    return fetch(baseUrl + `staffs/${id}`, {
+      method: "DELETE",
+    }).then(() => dispatch(deleteStaffSuccess(id)));
+  } else return;
+};
