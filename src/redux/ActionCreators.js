@@ -5,9 +5,9 @@ import { baseUrl } from "../shared/baseUrl";
 export const fetchStaffs = () => (dispatch) => {
   dispatch(staffsLoading(true));
 
-  return fetch(baseUrl + "staffs")
+  return fetch(baseUrl + "staffs") //call api
     .then((response) => response.json())
-    .then((staffs) => dispatch(addStaffs(staffs)));
+    .then((staffs) => dispatch(staffsSuccess(staffs)));
 };
 
 export const staffsLoading = () => ({
@@ -19,8 +19,8 @@ export const staffsFailed = (errmess) => ({
   payload: errmess,
 });
 
-export const addStaffs = (staffs) => ({
-  type: ActionTypes.ADD_STAFFS,
+export const staffsSuccess = (staffs) => ({
+  type: ActionTypes.STAFFS_SUCCESS,
   payload: staffs,
 });
 
@@ -47,29 +47,6 @@ export const addDepartments = (departments) => ({
   payload: departments,
 });
 
-//salry
-// export const fetchSalary = () => (dispatch) => {
-//   dispatch(salaryLoading(true));
-
-//   return fetch(baseUrl + "staffsSalary")
-//     .then((response) => response.json())
-//     .then((salarys) => dispatch(addSalarys(salarys)));
-// };
-
-// export const salaryLoading = () => ({
-//   type: ActionTypes.SALARY_LOADING,
-// });
-
-// export const salaryFailed = (errmess) => ({
-//   type: ActionTypes.SALARY_FAILED,
-//   payload: errmess,
-// });
-
-// export const addSalary = (salarys) => ({
-//   type: ActionTypes.ADD_SALARY,
-//   payload: salarys,
-// });
-
 export const fetchSalarys = () => (dispatch) => {
   dispatch(salarysLoading(true));
 
@@ -91,3 +68,51 @@ export const addSalarys = (salarys) => ({
   type: ActionTypes.ADD_SALARYS,
   payload: salarys,
 });
+
+//add staffs
+//staff
+export const addStaffs = (staff) => ({
+  type: ActionTypes.ADD_STAFFS,
+  payload: staff, //nhận thông tin nhân viên sau khi người dùng đã post lên
+});
+
+export const addStaff = (staff) => (dispatch) => {
+  //nhập du liệu
+  return (
+    fetch(baseUrl + "staffs", {
+      method: "POST",
+      body: JSON.stringify(staff),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "same-origin",
+    })
+      //kiểm lỗi
+      .then(
+        (response) => {
+          if (response.ok) {
+            return response;
+          } else {
+            var error = new Error(
+              "Error " + response.status + ": " + response.statusText
+            );
+            error.response = response;
+            throw error;
+          }
+        },
+        (error) => {
+          throw error;
+        }
+      )
+      .then((response) => response.json())
+      .then((response) => dispatch(addStaffs(response)))
+      .catch((error) => {
+        console.log("Post staffs", error.message);
+        alert("Your staff could not be posted\nError: " + error.message);
+      })
+  );
+};
+
+//update staffs
+
+//delete staffs

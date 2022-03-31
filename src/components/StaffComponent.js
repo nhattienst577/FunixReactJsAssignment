@@ -122,9 +122,8 @@ class StaffList extends Component {
               <h3>Nhân Viên</h3>
             </div>
             <div className="col-lg-1 mt-3">
-              <Button outline onClick={this.toggleModal}>
-                <span className="fa fa-plus fa-lg"></span>
-              </Button>
+              {/* khi nguoi dung nhap du lieu vao se duoc luu vao onAddStaff va truyen du lieu do qua main */}
+              <AddStaffForm onAdd={this.props.onAddStaff} />
             </div>
             {/* form search */}
             <div className="col-lg-6 col-md-6 mt-3">

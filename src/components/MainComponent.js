@@ -9,6 +9,7 @@ import Salary from "./SalaryComponent";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import {
+  addStaff,
   fetchStaffs,
   fetchDepartments,
   fetchSalarys,
@@ -33,9 +34,13 @@ const mapDispatchToProps = (dispatch) => ({
   fetchSalarys: () => {
     dispatch(fetchSalarys());
   },
+  addStaff: (staff) => {
+    dispatch(addStaff(staff));
+  },
 });
 
 class Main extends Component {
+  //khi mở ra là chạy ngay đầu tiên
   componentDidMount() {
     this.props.fetchStaffs();
     this.props.fetchDepartments();
@@ -91,6 +96,8 @@ class Main extends Component {
                     staffs={this.props.staffs}
                     staffsLoading={this.props.staffs.isLoading}
                     staffsErrMess={this.props.staffs.errMess}
+                    //hứng dữ liệu từ component con stafflist onAddStaff
+                    onAddStaff={this.props.addStaff}
                   />
                 )}
               />
