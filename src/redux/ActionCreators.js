@@ -114,6 +114,43 @@ export const addStaff = (staff) => (dispatch) => {
 };
 
 //update staffs
+export const updateStaffSuccess = (staff) => ({
+  type: ActionTypes.UPDATE_STAFFS,
+  payload: staff,
+});
+
+export const updateStaff = (staff) => (dispatch) => {
+  return fetch(baseUrl + "staffs", {
+    method: "PATCH",
+    body: JSON.stringify(staff),
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "same-origin",
+  })
+    .then(
+      (response) => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error(
+            "Error " + response.status + ": " + response.statusText
+          );
+          error.response = response;
+          throw error;
+        }
+      },
+      (error) => {
+        throw error;
+      }
+    )
+    .then((response) => response.json())
+    .then((response) => dispatch(updateStaffSuccess(response)))
+    .catch((error) => {
+      console.log("Updated staffs", error.message);
+      alert("Your staff could not be updated\nError: " + error.message);
+    });
+};
 
 //delete staffs
 export const deleteStaffSuccess = (id) => ({

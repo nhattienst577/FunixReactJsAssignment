@@ -48,7 +48,9 @@ function RenderStaffItem({ staff, onDeleteStaff }) {
           <CardTitle>{staff.name}</CardTitle>
         </Card>
       </Link>
-      <Button color="danger" onClick={() => onDeleteStaff(staff.id)} />
+      <Button color="danger" onClick={() => onDeleteStaff(staff.id)}>
+        Delete
+      </Button>
     </FadeTransform>
   );
   // });

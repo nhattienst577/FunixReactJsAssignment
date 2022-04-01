@@ -11,6 +11,7 @@ import { connect } from "react-redux";
 import {
   addStaff,
   deleteStaff,
+  updateStaff,
   fetchStaffs,
   fetchDepartments,
   fetchSalarys,
@@ -41,6 +42,9 @@ const mapDispatchToProps = (dispatch) => ({
   deleteStaff: (id) => {
     dispatch(deleteStaff(id));
   },
+  updateStaff: (staff) => {
+    dispatch(updateStaff(staff));
+  },
 });
 
 class Main extends Component {
@@ -62,6 +66,7 @@ class Main extends Component {
           departments={this.props.departments.departments}
           isLoading={this.props.staffs.isLoading}
           errMess={this.props.staffs.errMess}
+          onUpdateStaff={this.props.updateStaff}
         />
       );
     };
@@ -102,6 +107,7 @@ class Main extends Component {
                     staffsErrMess={this.props.staffs.errMess}
                     //hứng dữ liệu từ component con stafflist onAddStaff
                     onAddStaff={this.props.addStaff}
+                    onDeleteStaff={this.props.deleteStaff}
                   />
                 )}
               />

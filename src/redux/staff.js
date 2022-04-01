@@ -39,8 +39,19 @@ export const Staffs = (
       };
 
     //update staff
+    case ActionTypes.UPDATE_STAFFS:
+      return {
+        ...state,
+        staffs: action.payload,
+      };
 
     //delete staff
+
+    case ActionTypes.DELETE_STAFFS:
+      const filterStaffs = state.staffs.filter(
+        (staff) => staff.id !== action.payload
+      );
+      return { ...state, isLoading: false, staffs: filterStaffs };
 
     default:
       return state;
