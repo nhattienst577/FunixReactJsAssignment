@@ -213,7 +213,7 @@ class AddStaffForm extends Component {
         salaryScale: parseInt(value.salaryScale, 10),
         annualLeave: parseInt(value.annualLeave, 10),
         overTime: parseInt(value.overTime, 10),
-        image: "/assets/images/alberto.png",
+        image: "/assets/images/user.png",
       };
       this.props.onAdd(newStaff);
     }
